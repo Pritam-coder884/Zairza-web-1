@@ -17,8 +17,8 @@ const loginSkillsUser = catchAsync(async (req, res, next) => {
 
 const signUpSkillsUser = catchAsync(async (req, res, next) => {
 	const { firebaseUid } = req;
-
-	const signUpUser = await SkillAuthService.signUpSkillsUser(firebaseUid);
+	const {user} = req.body;
+	const signUpUser = await SkillAuthService.signUpSkillsUser(firebaseUid,user);
 
 	return res.status(httpStatus.CREATED).json({
 		code: httpStatus.CREATED,

@@ -12,14 +12,14 @@ const loginSkillsUser = async (firebaseUid) => {
 	return userInDb;
 };
 
-const signUpSkillsUser = async (firebaseUid) => {
+const signUpSkillsUser = async (firebaseUid,otherDetails) => {
 	const userInDb = await SkillsUser.findOne({ firebaseUid });
 
 	if (userInDb) {
 		throw new ApiError(httpStatus.UNAUTHORIZED, "User already exists");
 	}
-
-	const createNewUser = await SkillsUser.create({ firebaseUid });
+	console.log("OtherDetails",otherDetails); 
+	const createNewUser = await SkillsUser.create({ firebaseUid , ...otherDetails });
 
 	return createNewUser;
 };
